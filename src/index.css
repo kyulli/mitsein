@@ -1,0 +1,40 @@
+.app {
+  display: flex;
+  height: 100;
+}
+
+.sidebar {
+  /* display: flex; */
+  /* flex-direction: column; */
+  width: 100px;
+  padding: 50px;
+  font-family: Tahoma, Arial, sans-serif;
+  background-color: #ffffff;
+}
+
+.nav-item {
+  font-size: 16px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.indent {
+  padding-left: 10px;
+  font-size: 16px;
+  opacity: 0.85;
+}
+
+.nav-item.indent {
+  display: grid;
+  grid-template-columns: 20px 1fr;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+
+.content {
+  flex: 1;
+  padding: 24px;
+}
