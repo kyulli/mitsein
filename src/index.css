@@ -1,40 +1,246 @@
 .app {
-  display: flex;
-  height: 100;
+display: flex;
+height: 200vh;
 }
 
 .sidebar {
-  /* display: flex; */
-  /* flex-direction: column; */
-  width: 100px;
-  padding: 50px;
-  font-family: Tahoma, Arial, sans-serif;
-  background-color: #ffffff;
+/* display: flex; */
+/* flex-direction: column; */
+width: 100px;
+padding: 20px;
+font-family: Tahoma, Arial, sans-serif;
+background-color: #ffffff;
+}
+
+.nous-block img{
+  width: 200px;
+  height: auto;
+  display: block;
 }
 
 .nav-item {
-  font-size: 16px;
-  margin-bottom: 10px;
-  cursor: pointer;
+font-size: 16px;
+margin-bottom: 10px;
+cursor: pointer;
 }
 
 .indent {
-  padding-left: 10px;
-  font-size: 16px;
-  opacity: 0.85;
+padding-left: 10px;
+font-size: 16px;
+opacity: 0.85;
 }
 
 .nav-item.indent {
-  display: grid;
-  grid-template-columns: 20px 1fr;
+display: grid;
+grid-template-columns: 20px 1fr;
 }
 
 .underline {
-  text-decoration: underline;
+text-decoration: underline;
+}
+
+.app {
+display: flex;
+height: 20vh;
+}
+
+.content {
+flex: 1;
+padding: 40px;
+}
+
+.calendar-wrapper {
+display: flex;
+gap: 80px;
+align-items: flex-start;
+}
+
+.calendar-left {
+width: 720px;
+}
+
+.calendar-header {
+display: grid;
+grid-template-columns: 42px 1fr 42px;
+align-items: center;
+margin-bottom: 20px;
+font-size: 22px;
+}
+
+.month-title {
+text-align: center;
+}
+
+.month-arrow {
+border: none;
+background: transparent;
+cursor: pointer;
+font-size: 22px;
+line-height: 2;
+padding: 0;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr); 
+  gap: 20px;
+  width: 100%;
+  max-width: 720px; 
+  margin-top: 10px;
+}
+
+.calendar-day-label {
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  opacity: 0.5;
+  padding-bottom: 5px;
+}
+
+.calendar-empty {
+height: 20px;
+aspect-ratio: 1 / 1;
+}
+
+.calendar-cell {
+all:unset;
+border: none;
+background: transparent;
+cursor: pointer;
+text-align: center;
+padding: 4px 0;
+position: relative;
+height: 100px;
+
+display: bock;
+flex-direction: column;
+align-items: center;
+justify-content: center;
+
+width: 100%;
+height: 100px;
+}
+
+.calendar-cell.dim {
+color: #bbb;
+}
+
+.calendar-cell.today {
+  color: #050000;
+  font-weight: bold;
+}
+
+.calendar-cell.selected .day-num {
+text-decoration: underline;
+border-radius: 50%
+}
+
+.day-num {
+line-height: 1;
 }
 
 
-.content {
-  flex: 1;
-  padding: 24px;
+.calendar-right {
+width: 260px;
+font-family: "Tahoma";
+}
+
+.errand-header {
+margin-top: 15px;
+font-size: 16px;
+margin-bottom: 12px;
+}
+
+.errand-list {
+display: flex;
+flex-direction: column;
+gap: 6px;
+}
+
+.errand-item {
+font-size: 14px;
+text-orientation: mixed;
+line-height: 1;
+cursor: pointer;
+transition: opacity 0.15s;
+}
+
+.add-errand {
+margin-top: 0px;
+font-size: 14px;
+cursor: pointer;
+border: none;
+background: transparent;
+padding: 0;
+}
+
+.errand-hint {
+font-size: 12px;
+opacity: 0.6;
+}
+
+.errand-item:hover {
+  text-decoration: line-through;
+}
+
+.cell-errand {
+  font-size: 12px;
+  font-family: "Tahoma";
+  opacity: 0.6;
+  margin-top: 10px;
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cell-editor {
+  width: 100%;
+  font-size: 12px;
+  font-family: "Tahoma";
+  border: none;
+  background: transparent;
+  resize: none;
+  outline: none;
+  text-align: center;
+}
+
+.auth-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(255,255,255,0.92);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.auth-card {
+  width: 320px;
+  padding: 22px;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: transparent;
+  font-family: "Times New Roman", serif;
+}
+
+.auth-title {
+  font-size: 18px;
+  letter-spacing: 0.08em;
+  margin-bottom: 8px;
+}
+
+.auth-subtitle {
+  font-size: 12px;
+  opacity: 0.6;
+  margin-bottom: 14px;
+}
+
+.auth-btn {
+  border: 1px solid rgba(0,0,0,0.2);
+  background: transparent;
+  padding: 10px 12px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.06em;
 }
