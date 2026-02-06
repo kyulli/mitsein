@@ -50,6 +50,7 @@ type ContentItem = {
   author?: string;
   date?: string;       // MM/YY
   address?: string;
+  reader?: string;
 
   notes: ReadingNote[];
 };
@@ -509,7 +510,7 @@ function ReadingNotebook({
     <div className="reading-notebook">
       <button onClick={onBack}>← back</button>
 
-      <ContentMeta item={item} />
+      <ContentMeta item={item} onUpdate={onUpdate}/>
 
       <NotesPanel
         notes={item.notes}
@@ -614,6 +615,7 @@ function ShelfGrid({
         >
           {item.cover && <img src={item.cover} />}
           <div>{item.title}</div>
+          <div>{item.author}</div>
         </div>
       ))}
     </div>
@@ -638,6 +640,8 @@ function ContentMeta({
   function save() {
     onUpdate(draft);
     setEditing(false);
+
+    
   }
 
   if (!editing) {
@@ -649,12 +653,26 @@ function ContentMeta({
         {item.author && <div>{item.author}</div>}
         {item.date && <div>{item.date}</div>}
         {item.address && <div>{item.address}</div>}
+        {item.reader && <div>{item.reader}</div>}
       </div>
     );
   }
 
   return (
     <div className="content-meta editing">
+    <input
+      id="edit-cover-input"
+      type="file"
+      accept="image/*"
+      hidden
+      onChange={e => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        const url = URL.createObjectURL(file);
+        setDraft(d => ({ ...d, cover: url }));
+      }}
+    />
+
       <input
         placeholder="title"
         value={draft.title}
@@ -679,6 +697,12 @@ function ContentMeta({
         onChange={e => setDraft({ ...draft, address: e.target.value || undefined })}
       />
 
+      <input
+        placeholder="reader"
+        value={draft.reader ?? ""}
+        onChange={e => setDraft({ ...draft, reader: e.target.value || undefined })}
+      />
+
       <button onClick={save}>save</button>
     </div>
   );
@@ -697,6 +721,7 @@ function CreateContentModal({
     author: "",
     date: "",
     address: "",
+    reader: "",
     cover: "",
     notes: [],
   });
@@ -710,13 +735,40 @@ function CreateContentModal({
       date: draft.date || undefined,
       address: draft.address || undefined,
       cover: draft.cover || undefined,
+      reader: draft.reader || undefined,
     });
   }
 
   return (
     <div className="modal-backdrop" onClick={onCancel}>
       <div className="modal" onClick={e => e.stopPropagation()}>
-        <h3>new entry</h3>
+
+
+      {/* COVER UPLOAD */}
+         <div
+            className="cover-upload"
+            onClick={() => document.getElementById("cover-input")?.click()}
+          >
+            {draft.cover ? (
+              <img src={draft.cover} alt="cover" />
+            ) : (
+              <div className="cover-placeholder">upload cover</div>
+            )}
+          </div>
+
+          <input
+            id="cover-input"
+            type="file"
+            accept="image/*"
+            hidden
+            onChange={e => {
+              const file = e.target.files?.[0];
+              if (!file) return;
+
+              const url = URL.createObjectURL(file);
+              setDraft(d => ({ ...d, cover: url }));
+            }}
+          />
 
         <input
           placeholder="title"
@@ -743,9 +795,9 @@ function CreateContentModal({
         />
 
         <input
-          placeholder="cover image url"
-          value={draft.cover ?? ""}
-          onChange={e => setDraft({ ...draft, cover: e.target.value })}
+          placeholder="reader"
+          value={draft.reader ?? ""}
+          onChange={e => setDraft({ ...draft, reader: e.target.value })}
         />
 
         <div className="modal-actions">
@@ -781,19 +833,28 @@ function NotesPanel({
   return (
     <div className="notes-panel">
       {/* INPUT */}
-      <textarea
-        className="notes-input"
-        placeholder="write a note..."
-        value={input}
-        onChange={e => setInput(e.target.value)}
-        onKeyDown={e => {
-          if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
-            submit();
-          }
-        }}
-      />
+        <div className="notes-input-wrapper">
+          <textarea
+            className="notes-input"
+            placeholder="write a note..."
+            value={input}
+            onChange={e => setInput(e.target.value)}
+            onKeyDown={e => {
+              if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+                submit();
+              }
+            }}
+          />
 
-      <div className="notes-hint">⌘ / Ctrl + Enter to add</div>
+          <button
+            className="note-add-btn"
+            onClick={submit}
+            aria-label="add note"
+          >
+            +
+          </button>
+        </div>
+
 
       {/* STACKED NOTES */}
       <div className="notes-stack">

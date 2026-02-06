@@ -200,6 +200,8 @@ opacity: 0.6;
 
 .modal-backdrop {
   position: fixed;
+  font: 'Tahoma';
+  font-size: 12px;
   inset: 0;
   background: rgba(255, 255, 255, 0.92);
   display: flex;
@@ -403,7 +405,6 @@ input[type="range"]::-moz-range-thumb {
   white-space: pre-wrap;
 }
 
-
 .notes-item:nth-child(1) {
   margin-top: 20px;
 }
@@ -416,18 +417,90 @@ input[type="range"]::-moz-range-thumb {
   margin-top: 40px;
 }
 
-.reading-grid {
+.content-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0x;
 }
 
-.reading-cell {
+.content-cell {
+  width: 160px;
+  cursor: pointer;
+  font: "Tahoma";
+}
+
+.content-cell img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+
+.cover-upload {
+  width: 50%;
+  height: 240px;
+  border: 1px dashed rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
 }
 
-.reading-cell img {
-  width: 100%;
-  height: 160px;
+.cover-upload img {
+  width: 200%;
+  height: 160%;
   object-fit: cover;
+}
+
+.cover-placeholder {
+  font-size: 12px;
+  opacity: 0.5;
+}
+
+.content-meta {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.content-meta img {
+  width: 160px;      /* 封面宽度 */
+  height: 220px;     /* 封面高度 */
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.notes-input-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+.notes-input {
+  width: 80%;
+  min-height: 100px;
+  padding: 12px 40px 12px 12px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+.note-add-btn {
+  position: absolute;
+  right: 150px;
+  bottom: 10px;
+
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+
+  border: 1px solid #fefbfb;
+  background: rgba(255, 255, 255, 0.113);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+
+  opacity: 0.6;
+}
+
+.note-add-btn:hover {
+  opacity: 1;
 }
